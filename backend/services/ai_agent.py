@@ -70,7 +70,7 @@ async def _gemini(prompt: str) -> str:
     import google.generativeai as genai
     genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
     model = genai.GenerativeModel(
-        model_name="gemini-1.5-flash",
+        model_name="gemini-2.5-flash",
         system_instruction=SYSTEM_PROMPT,
     )
     response = await model.generate_content_async(prompt)

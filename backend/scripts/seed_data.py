@@ -12,11 +12,9 @@ load_dotenv()
 
 conn = tg.TigerGraphConnection(
     host=os.getenv("TG_HOST"),
-    username=os.getenv("TG_USERNAME"),
-    password=os.getenv("TG_PASSWORD"),
-    graphname=os.getenv("TG_GRAPH_NAME", "ChainTrace"),
+    graphname=os.getenv("TG_GRAPH_NAME", "chain_trace"),
+    gsqlSecret=os.getenv("TG_SECRET", ""),
 )
-conn.getToken(conn.createSecret())
 
 # ── Wallet pool ────────────────────────────────────────────────────
 LEGIT_WALLETS = [f"0xLEGIT{i:04d}" for i in range(1, 21)]

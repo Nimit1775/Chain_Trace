@@ -155,13 +155,15 @@ export default function GraphCanvas({ graphData, searchedAddress, clusters, path
       }
     })
 
-    graphData.edges.forEach((e, i) => {
-      const srcFlagged = graphData.nodes.find(n => n.id === e.source)?.flagged
-      elements.push({
-        data: { id: `e${i}`, source: e.source, target: e.target },
-        classes: srcFlagged ? 'suspicious' : '',
-      })
-    })
+    const nodeIds = new Set(graphData.nodes.map(n => n.id))
+graphData.edges.forEach((e, i) => {
+  if (!nodeIds.has(e.source) || !nodeIds.has(e.target)) return
+  const srcFlagged = graphData.nodes.find(n => n.id === e.source)?.flagged
+  elements.push({
+    data: { id: `e${i}`, source: e.source, target: e.target },
+    classes: srcFlagged ? 'suspicious' : '',
+  })
+})
 
     cy.add(elements)
     cy.style(buildStyle(animate))

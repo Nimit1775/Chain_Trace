@@ -20,17 +20,14 @@ class Settings:
 def get_settings():
     return Settings()
 
-
 def get_conn():
     import pyTigerGraph as tg
     s = get_settings()
     conn = tg.TigerGraphConnection(
         host=s.tg_host,
-        username=s.tg_username,
-        password=s.tg_password,
         graphname=s.tg_graph_name,
+        gsqlSecret=os.getenv("TG_SECRET", ""),
     )
-    conn.getToken(conn.createSecret())
     return conn
 
 

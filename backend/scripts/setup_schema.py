@@ -12,8 +12,7 @@ load_dotenv()
 
 conn = tg.TigerGraphConnection(
     host=os.getenv("TG_HOST"),
-    username=os.getenv("TG_USERNAME"),
-    password=os.getenv("TG_PASSWORD"),
+    gsqlSecret=os.getenv("TG_SECRET", ""),
 )
 
 print("Creating graph...")
